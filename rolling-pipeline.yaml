@@ -1,13 +1,13 @@
 pipeline:
   name: nginx-deployment-pipeline        
-  identifier: nginx-deployment-pipeline  
+  identifier: nginxdeploymentpipeline  
   projectIdentifier: demo                
   orgIdentifier: default                 
   tags: {}
   stages:
     - stage:
         name: deploy-nginx                
-        identifier: deploy-nginx           
+        identifier: deploynginx           
         description: "Deploying NGINX to Kubernetes"  
         type: Deployment                   
         spec:
