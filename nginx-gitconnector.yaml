@@ -1,0 +1,25 @@
+connector:
+  name: nginxgitconnector
+  identifier: nginxgitconnector
+  description: "GitHub Connector for NGINX repository"
+  accountIdentifier: _jMhMFzbSJqFP9Ak93S4eg
+  orgIdentifier: default
+  projectIdentifier: demo
+  type: Github
+  spec:
+    url: https://github.com/kutagullapavithra/harness
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: kutagullapavithra
+          tokenRef: nginx-gitpat  
+    executeOnDelegate: false
+    proxy: false
+    ignoreTestConnection: false
+    type: Repo
+    apiAccess:
+      type: Token
+      spec:
+        token:  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
