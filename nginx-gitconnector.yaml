@@ -1,7 +1,7 @@
 connector:
   name: nginxgitconnector
   identifier: nginxgitconnector
-  description: "GitHub Connector for NGINX repository"
+  description: ""
   accountIdentifier: _jMhMFzbSJqFP9Ak93S4eg
   orgIdentifier: default
   projectIdentifier: demo
@@ -14,12 +14,14 @@ connector:
         type: UsernameToken
         spec:
           username: kutagullapavithra
-          tokenRef: nginx-gitpat  
-    executeOnDelegate: false
-    proxy: false
-    ignoreTestConnection: false
-    type: Repo
+          tokenRef: nginx-gitpat
     apiAccess:
       type: Token
       spec:
-        token:  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
+        tokenRef: nginx-gitpat
+    delegateSelectors:
+      - helm-delegate
+    executeOnDelegate: true
+    proxy: false
+    ignoreTestConnection: false
+    type: Repo
