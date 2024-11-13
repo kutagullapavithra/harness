@@ -1,51 +1,53 @@
 pipeline:
-  name: nginx-deployment-pipeline        
-  identifier: nginxdeploymentpipeline  
-  projectIdentifier: demo                
-  orgIdentifier: default                 
+  name: nginx-rolling-pipeline
+  identifier: nginx_rolling_pipeline
+  projectIdentifier: demo
+  orgIdentifier: default
   tags: {}
   stages:
     - stage:
-        name: deploy-nginx                
-        identifier: deploynginx           
-        description: "Deploying NGINX to Kubernetes"  
-        type: Deployment                   
+        name: deploy-nginx
+        identifier: deploynginx
+        description: Deploy NGINX with rolling updates
+        type: Deployment
         spec:
-          deploymentType: Kubernetes      
+          deploymentType: Kubernetes
           service:
-            serviceRef: nginx_service     
+            serviceRef: nginxservice
+            gitBranch: main
           environment:
-            environmentRef: production   
-          failureStrategies:
-            - onFailure:
-                errors:
-                  - AllErrors           
-                action:
-                  type: StageRollback  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            environmentRef: nginxenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: nginx_k8sinfra
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+                    delegateSelectors:
+                      - helm-delegate
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - helm-delegate
+        when:
+          pipelineStatus: All
