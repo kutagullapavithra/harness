@@ -1,0 +1,15 @@
+infrastructureDefinition:
+  name: nginx_k8sinfra  # Changed the name to nginx_k8sinfra
+  identifier: nginx_k8sinfra  # Changed the identifier to nginx_k8sinfra
+  description: ""
+  tags: {}
+  orgIdentifier: default
+  projectIdentifier: default_project
+  environmentRef: nginxenv  # Ensure this environment is defined correctly
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: harnessk8sconnector  # Ensure this connector is properly configured
+    namespace: default  # Ensure the namespace is correct for your NGINX deployment
+    releaseName: release-<+INFRA_KEY>  # This will be dynamically populated with the INFRA_KEY
+  allowSimultaneousDeployments: false
