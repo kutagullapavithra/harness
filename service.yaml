@@ -1,0 +1,24 @@
+service:
+  name: nginx_service      
+  identifier: nginxservice   
+
+  serviceDefinition:
+    type: Kubernetes         
+    spec:
+      manifests:
+        - manifest:
+            identifier: nginx   
+            spec:
+              store:
+                type: Github    
+                spec:
+                  connectorRef: nginxgitconnector  
+                  gitFetchType: Main 
+                  paths:
+                    - nginx/nginx-deployment.yaml    
+                    - nginx/nginx-service.yaml       
+                  repoName: harness  
+                  branch: main                    
+              skipResourceVersioning: false         
+              enableDeclarativeRollback: false      
+  gitOpsEnabled: false               

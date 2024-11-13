@@ -1,0 +1,51 @@
+pipeline:
+  name: nginx-deployment-pipeline        
+  identifier: nginx-deployment-pipeline  
+  projectIdentifier: demo                
+  orgIdentifier: default                 
+  tags: {}
+  stages:
+    - stage:
+        name: deploy-nginx                
+        identifier: deploy-nginx           
+        description: "Deploying NGINX to Kubernetes"  
+        type: Deployment                   
+        spec:
+          deploymentType: Kubernetes      
+          service:
+            serviceRef: nginx_service     
+          environment:
+            environmentRef: production   
+          failureStrategies:
+            - onFailure:
+                errors:
+                  - AllErrors           
+                action:
+                  type: StageRollback  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
