@@ -9,7 +9,7 @@ infrastructureDefinition:
   deploymentType: Kubernetes
   type: KubernetesDirect
   spec:
-    connectorRef: harnessk8sconnector  # Ensure this connector is properly configured
+    connectorRef: nginxkubernetes-connector  # Ensure this connector is properly configured
     namespace: default  # Ensure the namespace is correct for your NGINX deployment
     releaseName: release-<+INFRA_KEY>  # This will be dynamically populated with the INFRA_KEY
   allowSimultaneousDeployments: false
