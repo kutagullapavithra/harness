@@ -13,10 +13,10 @@ service:
                 type: Github    
                 spec:
                   connectorRef: nginxgitconnector  
-                  gitFetchType: Main 
-                  paths:
-                    - nginx/nginx-deployment.yaml    
-                    - nginx/nginx-service.yaml       
+                  gitFetchType: Main
+                  manifests:
+                    - path: "k8s/nginx-deployment.yaml"
+                    - path: "k8s/nginx-service.yaml" 
                   repoName: harness  
                   branch: main                    
               skipResourceVersioning: false         
