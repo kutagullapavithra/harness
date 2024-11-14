@@ -1,25 +1,26 @@
 service:
-  name: nginx-service      
-  identifier: nginxservice   
-
+  name: nginx-service
+  identifier: nginxservice
   serviceDefinition:
-    type: Kubernetes         
+    type: Kubernetes
     spec:
-      manifests:
-        - manifest:
-            identifier: nginx   
+      manifests:                  # This is where you define the Kubernetes manifests
+        - manifest:               # Each manifest here represents a Kubernetes resource (e.g., Deployment, Service)
+            identifier: nginx     # This is a unique identifier for the manifest (can be any name)
             spec:
-              store:
-                type: Github    
+              store:              # Where are the manifests stored (e.g., GitHub)
+                type: Github      # Specify the store type as Github
                 spec:
-                  connectorRef: nginxgitconnector  
-                  gitFetchType: Main
-                  repoName: harness
-                  branch: main
+                  connectorRef: github-connector  # Reference your Git connector
+                  gitFetchType: Branch            # Fetch from a specific Git branch
+                  repoName: harness               # Name of your repository
+                  branch: main                    # Branch name where the manifests are stored
                   paths:
-                   - "nginx-deployment.yaml"
-                   - "nginx-svc.yaml"
-                  folderpath: "/"               
-              skipResourceVersioning: false         
-              enableDeclarativeRollback: false      
-  gitOpsEnabled: false               
+                    - "nginx-deployment.yaml"      # Path to the deployment YAML file
+                    - "nginx-service.yaml"         # Path to the service YAML file
+              skipResourceVersioning: false      # Set to false if you want versioning
+              enableDeclarativeRollback: false  # Set to false if not using declarative rollback
+  gitOpsEnabled: false            # Optional, set to true if you're using GitOps
+  orgIdentifier: default          # Org identifier in Harness
+  projectIdentifier: demo         # Project identifier in Harness
+            
