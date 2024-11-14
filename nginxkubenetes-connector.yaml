@@ -1,0 +1,14 @@
+connector:
+  name: ngkubernetes-connector
+  identifier: ngkubernetesconnector
+  description: ""
+  accountIdentifier: _jMhMFzbSJqFP9Ak93S4eg
+  orgIdentifier: default
+  projectIdentifier: demo
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+      - helm-delegate
+    ignoreTestConnection: false
