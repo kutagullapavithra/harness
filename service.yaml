@@ -1,5 +1,5 @@
 service:
-  name: nginx_service      
+  name: nginx-service      
   identifier: nginxservice   
 
   serviceDefinition:
@@ -14,12 +14,12 @@ service:
                 spec:
                   connectorRef: nginxgitconnector  
                   gitFetchType: Main
+                  repoName: harness
+                  branch: main
                   paths:
                    - "nginx-deployment.yaml"
                    - "nginx-svc.yaml"
-                  folderpath: "/"
-                  repoName: harness  
-                  branch: main                    
+                  folderpath: "/"               
               skipResourceVersioning: false         
               enableDeclarativeRollback: false      
   gitOpsEnabled: false               
