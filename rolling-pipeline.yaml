@@ -15,6 +15,9 @@ pipeline:
           service:
             serviceRef: nginxservice
             gitBranch: main
+            manifests:
+              - path: "k8s/nginx-deployment.yaml"
+              - path: "k8s/nginx-service.yaml"
           environment:
             environmentRef: nginxenv
             deployToAll: false
