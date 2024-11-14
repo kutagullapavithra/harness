@@ -1,10 +1,10 @@
 connector:
-  name: ngkubernetes-connector
-  identifier: ngkubernetesconnector
+  name: harness_k8sconnector
+  identifier: harnessk8sconnector
   description: ""
   accountIdentifier: _jMhMFzbSJqFP9Ak93S4eg
   orgIdentifier: default
-  projectIdentifier: demo
+  projectIdentifier: default_project
   type: K8sCluster
   spec:
     credential:
@@ -12,3 +12,4 @@ connector:
     delegateSelectors:
       - helm-delegate
     ignoreTestConnection: false
+
